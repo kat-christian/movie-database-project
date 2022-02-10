@@ -39,3 +39,20 @@ function getMovies() {
             })
     }, 1500)
 }
+
+function addMovies(movieObj) {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movieObj)
+    };
+    return fetch(apiList, options)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            getMovies();
+        })
+        .catch(error => console.error(error))
+}
