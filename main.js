@@ -3,6 +3,7 @@ const apiList = "https://perpetual-pear-bearberry.glitch.me/movies"
 getMovies()
 
 function getMovies() {
+    $(".container").html('<div class="loader m-auto"></div>')
     setTimeout(() => { // emulates a loading screen to show off the loading animation
         fetch(apiList)
             .then(response => response.json())
