@@ -24,3 +24,9 @@ img {
     font-size: 3em;
     font-family: "Anton", sans-serif;
 }
+
+#addMovie {
+    position: absolute;
+    top: 1.3em;
+    right: 1em;
+}

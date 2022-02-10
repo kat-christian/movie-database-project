@@ -56,3 +56,10 @@ function addMovies(movieObj) {
         })
         .catch(error => console.error(error))
 }
+
+$("#addMovieButton").click(function () {
+    addMovies({
+        "title": $("#movieTitle").val(),
+        "rating": $("#movieRating").val()
+    })
+})
