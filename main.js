@@ -31,8 +31,12 @@ function getMovies() {
                             <li class="list-group-item">Dir: ${director}, ${year}</li>
                             <li class="list-group-item">${actors}</li>
                             <li class="list-group-item">Rating: ${rating}</li>
+                            <li class="list-group-item">${genre}</li>
                         </ul>
-                        <div class="card-footer">${genre}</div>
+                        <div class="card-footer text-end">
+                            <button type="button" class="editMovieButton btn btn-outline-success btn-sm">Edit</button>
+                            <button type="button" class="deleteMovieButton btn btn-outline-danger btn-sm">Delete</button>
+                        </div>
                     </div>
                 `)
                 })
