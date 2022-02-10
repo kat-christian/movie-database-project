@@ -1,24 +1,26 @@
 const apiList = "https://perpetual-pear-bearberry.glitch.me/movies"
 
 getMovies()
+
 function getMovies() {
-    setTimeout(() => {
-    fetch(apiList)
-        .then(response => response.json())
-        .then(movies => {
-            $(".loader").hide();
-            movies.forEach(movie => {
-                console.log(movie);
-                let title = movie.title
-                let img = movie.poster
-                let director = movie.director
-                let actors = movie.actors
-                let genre = movie.genre
-                let year = movie.year
-                let plot = movie.plot
-                let rating = movie.rating
-                $(".card-deck").append(`
-                    <div class="card" style="width: 18rem">
+    setTimeout(() => { // emulates a loading screen to show off the loading animation
+        $(".container").html('<div class="card-deck d-flex justify-content-between flex-wrap"></div>')
+        fetch(apiList)
+            .then(response => response.json())
+            .then(movies => {
+                $(".loader").hide();
+                movies.forEach(movie => {
+                    console.log(movie);
+                    let title = movie.title
+                    let img = movie.poster
+                    let director = movie.director
+                    let actors = movie.actors
+                    let genre = movie.genre
+                    let year = movie.year
+                    let plot = movie.plot
+                    let rating = movie.rating
+                    $(".card-deck").append(`
+                    <div class="card mb-5" style="width: 18rem">
                         <img class="card-img-top" src="${img}" alt="movie poster">
                         <div class="card-body">
                             <h5 class="card-title">${title}</h5>
@@ -32,7 +34,7 @@ function getMovies() {
                         <div class="card-footer">${genre}</div>
                     </div>
                 `)
+                })
             })
-        })
     }, 1500)
 }
