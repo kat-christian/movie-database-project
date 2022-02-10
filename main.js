@@ -4,11 +4,11 @@ getMovies()
 
 function getMovies() {
     setTimeout(() => { // emulates a loading screen to show off the loading animation
-        $(".container").html('<div class="card-deck d-flex justify-content-between flex-wrap"></div>')
         fetch(apiList)
             .then(response => response.json())
             .then(movies => {
                 $(".loader").hide();
+                $(".container").html('<div class="card-deck d-flex justify-content-between flex-wrap"></div>')
                 movies.forEach(movie => {
                     console.log(movie);
                     let title = movie.title
