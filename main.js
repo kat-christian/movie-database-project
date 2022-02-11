@@ -1,6 +1,9 @@
 const apiList = "https://perpetual-pear-bearberry.glitch.me/movies"
 
 getMovies()
+
+let moviesArr = [];
+
 function getMovies() {
     $(".container").html('<div class="loader m-auto"></div>')
     setTimeout(() => { // emulates a loading screen to show off the loading animation
@@ -11,6 +14,7 @@ function getMovies() {
                 $(".container").html('<div class="card-deck d-flex justify-content-between flex-wrap"></div>')
                 movies.forEach(movie => {
                     console.log(movie);
+                    moviesArr.push(movie)
                     let title = movie.title
                     let img = movie.poster
                     let director = movie.director
@@ -44,10 +48,16 @@ function getMovies() {
             })
             .then(function editButton () {
                 $(".editMovieButton").click(function () {
-                    console.log("edit button clicked")
                     let movieId = $(this).attr("data-id")
-                    $("#editMovieTitle").val()
-                    $("#editMovieRating").val()
+                    console.log(movieId)
+                    let movieObj = moviesArr.filter(function (movie) {
+                        if (movie.id === movieId) {
+                            return movie;
+                        }
+                    })
+                    console.log(movieObj);
+                    $("#editMovieTitle").val() //movieObj[0].title
+                    $("#editMovieRating").val() //movieObj[0].rating
                 })
             })
             .then(function deleteButton () {
@@ -60,6 +70,7 @@ function getMovies() {
 }
 
 function addMovies(movieObj) {
+    console.log(movieObj)
     const options = {
         method: "POST",
         headers: {
@@ -94,9 +105,11 @@ function editMovies(movieObj) {
         .catch(error => console.log(error))
 }
 
-$("#addMovieButton").click(function () {
+$("#addMovieButton").click(function (e) {
+    e.preventDefault();
     let movieTitle = $("#addMovieTitle").val();
     let movieRating = $("#addMovieRating").val();
+    moviesArr.length = 0;
     addMovies({
         "title": movieTitle,
         "rating": movieRating
@@ -107,6 +120,7 @@ $('#editMovieButton').click(function (e) {
     e.preventDefault()
     let movieTitle = $("#editMovieTitle").val();
     let movieRating = $("#editMovieRating").val();
+    moviesArr.length = 0;
     editMovies({
         "title": movieTitle,
         "rating": movieRating
