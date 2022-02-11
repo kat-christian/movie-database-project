@@ -20,6 +20,7 @@ function getMovies() {
                     let year = movie.year
                     let plot = movie.plot
                     let rating = movie.rating
+                    let id = movie.id
                     $(".card-deck").append(`
                     <div class="card mb-5" style="width: 18rem">
                         <img class="card-img-top" src="${img}" alt="movie poster">
@@ -34,8 +35,8 @@ function getMovies() {
                             <li class="list-group-item">${genre}</li>
                         </ul>
                         <div class="card-footer text-end">
-                            <button type="button" class="editMovieButton btn btn-outline-success btn-sm">Edit</button>
-                            <button type="button" class="deleteMovieButton btn btn-outline-danger btn-sm">Delete</button>
+                            <button type="button" data-id="${id}" class="editMovieButton btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#editMovieModal">Edit</button>
+                            <button type="button" data-id="${id}" class="deleteMovieButton btn btn-outline-danger btn-sm">Delete</button>
                         </div>
                     </div>
                 `)
@@ -46,9 +47,9 @@ function getMovies() {
 
 function addMovies(movieObj) {
     const options = {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(movieObj)
     };
@@ -58,12 +59,39 @@ function addMovies(movieObj) {
             console.log(data);
             getMovies();
         })
-        .catch(error => console.error(error))
+        .catch(error => console.log(error))
+}
+
+function editMovies(movieObj) {
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(movieObj)
+    };
+    return fetch(apiList, options)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            getMovies();
+        })
+        .catch(error => console.log(error))
 }
 
 $("#addMovieButton").click(function () {
     addMovies({
-        "title": $("#movieTitle").val(),
-        "rating": $("#movieRating").val()
-    })
+        "title": $("#addMovieTitle").val(),
+        "rating": $("#addMovieRating").val()
+    }).then(r => console.log(r.json()))
+})
+
+
+// $(".deleteMovieButton").click(function () {
+//     console.log("something")
+//     // $("#editMovieTitle").val("testing")
+// })
+
+document.querySelector(".deleteMovieButton").addEventListener("click" , event => {
+    console.log("testing");
 })

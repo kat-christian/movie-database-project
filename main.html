@@ -19,35 +19,63 @@
     <button type="button" id="addMovie" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addMovieModal">
         Add a movie
     </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="addMovieModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addMovieModalLabel">Add a movie</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="movieTitle" class="col-form-label">Title:</label>
-                            <input type="text" class="form-control" id="movieTitle">
-                        </div>
-                        <div class="mb-3">
-                            <label for="movieRating" class="col-form-label">Rating:</label>
-                            <input type="text" class="form-control" id="movieRating">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="addMovieButton" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
-                </div>
+</nav>
+<!-- Modals -->
+<!--Add movie-->
+<div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="addMovieModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addMovieModalLabel">Add a movie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="addMovieTitle" class="col-form-label">Title:</label>
+                        <input type="text" class="form-control" id="addMovieTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label for="addMovieRating" class="col-form-label">Rating:</label>
+                        <input type="text" class="form-control" id="addMovieRating" placeholder="0-5">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="addMovieButton" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>
-</nav>
+</div>
+<!--Edit movie-->
+<div class="modal fade" id="editMovieModal" tabindex="-1" aria-labelledby="editMovieModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMovieModalLabel">Edit this movie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="editMovieTitle" class="col-form-label">Title:</label>
+                        <input type="text" class="form-control" id="editMovieTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editMovieRating" class="col-form-label">Rating:</label>
+                        <input type="text" class="form-control" id="editMovieRating" placeholder="0-5">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="editMovieButton" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Movie cards container-->
 <div class="container d-flex mt-5"></div>
 
 <!--jQuery-->
