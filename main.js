@@ -48,16 +48,15 @@ function getMovies() {
             })
             .then(function editButton () {
                 $(".editMovieButton").click(function () {
-                    let movieId = $(this).attr("data-id")
-                    console.log(movieId)
+                    let movieId = parseInt($(this).attr("data-id"))
                     let movieObj = moviesArr.filter(function (movie) {
                         if (movie.id === movieId) {
                             return movie;
                         }
                     })
                     console.log(movieObj);
-                    $("#editMovieTitle").val() //movieObj[0].title
-                    $("#editMovieRating").val() //movieObj[0].rating
+                    $("#editMovieTitle").val(movieObj[0].title)
+                    $("#editMovieRating").val(movieObj[0].rating)
                 })
             })
             .then(function deleteButton () {
@@ -126,3 +125,5 @@ $('#editMovieButton').click(function (e) {
         "rating": movieRating
     }).then(r => console.log(r.json()))
 })
+
+// create new object, fill with variables, use that for push and delete requests
