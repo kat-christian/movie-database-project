@@ -23,16 +23,17 @@ function getMovies() {
                     let id = movie.id
                     $(".card-deck").append(`
                     <div class="card mb-5" style="width: 18rem">
-                        <img class="card-img-top" src="${img}" alt="movie poster">
+                        <img class="moviePoster card-img-top" src="${img}" alt="movie poster">
                         <div class="card-body">
-                            <h5 class="card-title">${title}</h5>
-                            <p class="card-text">${plot}</p>
+                            <h5 class="movieTitle card-title">${title}</h5>
+                            <p class="moviePlot card-text">${plot}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Dir: ${director}, ${year}</li>
-                            <li class="list-group-item">${actors}</li>
-                            <li class="list-group-item">Rating: ${rating}</li>
-                            <li class="list-group-item">${genre}</li>
+                            <li class="movieDirector list-group-item">${director}</li>
+                            <li class="movieYear list-group-item">${year}</li>
+                            <li class="movieActors list-group-item">${actors}</li>
+                            <li class="movieRating list-group-item">${rating}</li>
+                            <li class="movieGenre list-group-item">${genre}</li>
                         </ul>
                         <div class="card-footer text-end">
                             <button type="button" data-id="${id}" class="editMovieButton btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#editMovieModal">Edit</button>
@@ -42,6 +43,20 @@ function getMovies() {
                 `)
                 })
             })
+            .then(function editButton () {
+                $(".editMovieButton").click(function () {
+                    console.log("edit button clicked")
+                    let movieId = $(this).attr("data-id")
+                    $("#editMovieTitle").val()
+                    $("#editMovieRating").val(movieId)
+                })
+            })
+            .then(function deleteButton () {
+                $(".deleteMovieButton").click(function () {
+                    console.log("delete button clicked")
+                })
+            })
+            .catch(error => console.log(error));
     }, 1500)
 }
 
@@ -80,18 +95,10 @@ function editMovies(movieObj) {
 }
 
 $("#addMovieButton").click(function () {
+    let movieTitle = $("#addMovieTitle").val();
+    let movieRating = $("#addMovieRating").val();
     addMovies({
-        "title": $("#addMovieTitle").val(),
-        "rating": $("#addMovieRating").val()
+        "title": movieTitle,
+        "rating": movieRating
     }).then(r => console.log(r.json()))
-})
-
-
-// $(".deleteMovieButton").click(function () {
-//     console.log("something")
-//     // $("#editMovieTitle").val("testing")
-// })
-
-document.querySelector(".deleteMovieButton").addEventListener("click" , event => {
-    console.log("testing");
 })
