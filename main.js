@@ -1,7 +1,6 @@
 const apiList = "https://perpetual-pear-bearberry.glitch.me/movies"
 
 getMovies()
-
 function getMovies() {
     $(".container").html('<div class="loader m-auto"></div>')
     setTimeout(() => { // emulates a loading screen to show off the loading animation
@@ -48,7 +47,7 @@ function getMovies() {
                     console.log("edit button clicked")
                     let movieId = $(this).attr("data-id")
                     $("#editMovieTitle").val()
-                    $("#editMovieRating").val(movieId)
+                    $("#editMovieRating").val()
                 })
             })
             .then(function deleteButton () {
@@ -78,6 +77,7 @@ function addMovies(movieObj) {
 }
 
 function editMovies(movieObj) {
+    console.log(movieObj)
     const options = {
         method: "PUT",
         headers: {
@@ -98,6 +98,16 @@ $("#addMovieButton").click(function () {
     let movieTitle = $("#addMovieTitle").val();
     let movieRating = $("#addMovieRating").val();
     addMovies({
+        "title": movieTitle,
+        "rating": movieRating
+    }).then(r => console.log(r.json()))
+})
+
+$('#editMovieButton').click(function (e) {
+    e.preventDefault()
+    let movieTitle = $("#editMovieTitle").val();
+    let movieRating = $("#editMovieRating").val();
+    editMovies({
         "title": movieTitle,
         "rating": movieRating
     }).then(r => console.log(r.json()))
