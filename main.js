@@ -33,10 +33,9 @@ function getMovies() {
                             <p class="moviePlot card-text">${plot}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="movieDirector list-group-item">${director}</li>
-                            <li class="movieYear list-group-item">${year}</li>
+                            <li class="movieDirector list-group-item">Dir: ${director}, ${year}</li>
                             <li class="movieActors list-group-item">${actors}</li>
-                            <li class="movieRating list-group-item">${rating}</li>
+                            <li class="movieRating list-group-item">Rating: ${rating}/10</li>
                             <li class="movieGenre list-group-item">${genre}</li>
                         </ul>
                         <div class="card-footer text-end">
