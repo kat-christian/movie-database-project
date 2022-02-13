@@ -23,19 +23,43 @@
 <!-- Modals -->
 <!--Add movie-->
 <div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="addMovieModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addMovieModalLabel">Add a movie</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3">
+                <form class="row">
+                    <div class="col-6 mb-2">
                         <label for="addMovieTitle" class="col-form-label">Title:</label>
                         <input type="text" class="form-control" id="addMovieTitle">
                     </div>
-                    <div class="mb-3">
+                    <div class="col-4 mb-2">
+                        <label for="addMovieDirector" class="col-form-label">Director:</label>
+                        <input type="text" class="form-control" id="addMovieDirector">
+                    </div>
+                    <div class="col-2 mb-2">
+                        <label for="addMovieYear" class="col-form-label">Year:</label>
+                        <input type="text" class="form-control" id="addMovieYear">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="addMoviePlot" class="col-form-label">Plot:</label>
+                        <textarea name="moviePlot" id="addMoviePlot" class="form-control" cols="30" rows="8"></textarea>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="addMovieActors" class="col-form-label">Actors:</label>
+                        <input type="text" class="form-control" id="addMovieActors">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="addMovieGenre" class="col-form-label">Genre(s):</label>
+                        <input type="text" class="form-control" id="addMovieGenre">
+                    </div>
+                    <div class="col-10 mb-2">
+                        <label for="addMoviePoster" class="col-form-label">Image URL:</label>
+                        <input type="text" class="form-control" id="addMoviePoster" placeholder="At least 286x425">
+                    </div>
+                    <div class="col-2 mb-2">
                         <label for="addMovieRating" class="col-form-label">Rating:</label>
                         <input type="text" class="form-control" id="addMovieRating" placeholder="0-5">
                     </div>
@@ -50,19 +74,43 @@
 </div>
 <!--Edit movie-->
 <div class="modal fade" id="editMovieModal" tabindex="-1" aria-labelledby="editMovieModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editMovieModalLabel">Edit this movie</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3">
+                <form class="row">
+                    <div class="col-6 mb-2">
                         <label for="editMovieTitle" class="col-form-label">Title:</label>
                         <input type="text" class="form-control" id="editMovieTitle">
                     </div>
-                    <div class="mb-3">
+                    <div class="col-4 mb-2">
+                        <label for="editMovieDirector" class="col-form-label">Director:</label>
+                        <input type="text" class="form-control" id="editMovieDirector">
+                    </div>
+                    <div class="col-2 mb-2">
+                        <label for="editMovieYear" class="col-form-label">Year:</label>
+                        <input type="text" class="form-control" id="editMovieYear">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="editMoviePlot" class="col-form-label">Plot:</label>
+                        <textarea name="moviePlot" id="editMoviePlot" class="form-control" cols="30" rows="8"></textarea>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="editMovieActors" class="col-form-label">Actors:</label>
+                        <input type="text" class="form-control" id="editMovieActors">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="editMovieGenre" class="col-form-label">Genre(s):</label>
+                        <input type="text" class="form-control" id="editMovieGenre">
+                    </div>
+                    <div class="col-10 mb-2">
+                        <label for="editMoviePoster" class="col-form-label">Image URL:</label>
+                        <input type="text" class="form-control" id="editMoviePoster" placeholder="At least 286x425">
+                    </div>
+                    <div class="col-2 mb-2">
                         <label for="editMovieRating" class="col-form-label">Rating:</label>
                         <input type="text" class="form-control" id="editMovieRating" placeholder="0-5">
                     </div>
@@ -71,6 +119,24 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" id="editMovieButton" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Delete?-->
+<div class="modal fade" id="deleteMovieModal" tabindex="-1" aria-labelledby="deleteMovieModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteMovieModalLabel">Delete?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this movie from the list?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="deleteMovieButton" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
             </div>
         </div>
     </div>

@@ -1,13 +1,14 @@
-const apiList = "https://perpetual-pear-bearberry.glitch.me/movies"
+const movieList = "https://perpetual-pear-bearberry.glitch.me/movies";
 
-getMovies()
+getMovies();
 
 let moviesArr = [];
+let myMovieObj = {};
 
 function getMovies() {
     $(".container").html('<div class="loader m-auto"></div>')
     setTimeout(() => { // emulates a loading screen to show off the loading animation
-        fetch(apiList)
+        fetch(movieList)
             .then(response => response.json())
             .then(movies => {
                 $(".loader").hide();
@@ -40,7 +41,7 @@ function getMovies() {
                         </ul>
                         <div class="card-footer text-end">
                             <button type="button" data-id="${id}" class="editMovieButton btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#editMovieModal">Edit</button>
-                            <button type="button" data-id="${id}" class="deleteMovieButton btn btn-outline-danger btn-sm">Delete</button>
+                            <button type="button" data-id="${id}" class="deleteMovieButton btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMovieModal">Delete</button>
                         </div>
                     </div>
                 `)
@@ -49,19 +50,32 @@ function getMovies() {
             .then(function editButton () {
                 $(".editMovieButton").click(function () {
                     let movieId = parseInt($(this).attr("data-id"))
-                    let movieObj = moviesArr.filter(function (movie) {
+                    let movieArr = moviesArr.filter(function (movie) {
                         if (movie.id === movieId) {
                             return movie;
                         }
                     })
-                    console.log(movieObj);
-                    $("#editMovieTitle").val(movieObj[0].title)
-                    $("#editMovieRating").val(movieObj[0].rating)
+                    myMovieObj = movieArr[0];
+                    $("#editMovieTitle").val(myMovieObj.title)
+                    $("#editMovieDirector").val(myMovieObj.director)
+                    $("#editMovieYear").val(myMovieObj.year)
+                    $("#editMoviePlot").val(myMovieObj.plot)
+                    $("#editMovieActors").val(myMovieObj.actors)
+                    $("#editMovieGenre").val(myMovieObj.genre)
+                    $("#editMoviePoster").val(myMovieObj.poster)
+                    $("#editMovieRating").val(myMovieObj.rating)
                 })
             })
             .then(function deleteButton () {
                 $(".deleteMovieButton").click(function () {
                     console.log("delete button clicked")
+                    let movieId = parseInt($(this).attr("data-id"))
+                    let movieArr = moviesArr.filter(function (movie) {
+                        if (movie.id === movieId) {
+                            return movie;
+                        }
+                    })
+                    myMovieObj = movieArr[0];
                 })
             })
             .catch(error => console.log(error));
@@ -77,7 +91,7 @@ function addMovies(movieObj) {
         },
         body: JSON.stringify(movieObj)
     };
-    return fetch(apiList, options)
+    return fetch(movieList, options)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -95,7 +109,7 @@ function editMovies(movieObj) {
         },
         body: JSON.stringify(movieObj)
     };
-    return fetch(apiList, options)
+    return fetch(`${movieList}/${myMovieObj.id}`, options)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -104,26 +118,73 @@ function editMovies(movieObj) {
         .catch(error => console.log(error))
 }
 
+function deleteMovies(movieObj) {
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(movieObj)
+    };
+    return fetch(`${movieList}/${myMovieObj.id}`, options)
+        .then(response => response.json)
+        .then(data => {
+            console.log(data)
+            getMovies();
+        })
+        .catch(error => console.log(error));
+}
+
+
 $("#addMovieButton").click(function (e) {
     e.preventDefault();
-    let movieTitle = $("#addMovieTitle").val();
-    let movieRating = $("#addMovieRating").val();
+    let title = $("#addMovieTitle").val();
+    let director = $("#addMovieDirector").val();
+    let year = $("#addMovieYear").val();
+    let plot = $("#addMoviePlot").val();
+    let actors = $("#addMovieActors").val();
+    let genre = $("#addMovieGenre").val();
+    let poster = $("#addMoviePoster").val();
+    let rating = $("#addMovieRating").val();
     moviesArr.length = 0;
     addMovies({
-        "title": movieTitle,
-        "rating": movieRating
+        "title": title,
+        "director": director,
+        "year": year,
+        "plot": plot,
+        "actors": actors,
+        "genre": genre,
+        "poster": poster,
+        "rating": rating
     }).then(r => console.log(r.json()))
 })
 
-$('#editMovieButton').click(function (e) {
+$("#editMovieButton").click(function (e) {
     e.preventDefault()
-    let movieTitle = $("#editMovieTitle").val();
-    let movieRating = $("#editMovieRating").val();
+    let title = $("#editMovieTitle").val();
+    let director = $("#editMovieDirector").val();
+    let year = $("#editMovieYear").val();
+    let plot = $("#editMoviePlot").val();
+    let actors = $("#editMovieActors").val();
+    let genre = $("#editMovieGenre").val();
+    let poster = $("#editMoviePoster").val();
+    let rating = $("#editMovieRating").val();
     moviesArr.length = 0;
     editMovies({
-        "title": movieTitle,
-        "rating": movieRating
+        "title": title,
+        "director": director,
+        "year": year,
+        "plot": plot,
+        "actors": actors,
+        "genre": genre,
+        "poster": poster,
+        "rating": rating
     }).then(r => console.log(r.json()))
 })
 
-// create new object, fill with variables, use that for push and delete requests
+$("#deleteMovieButton").click(function (e) {
+    e.preventDefault()
+    moviesArr.length = 0;
+    deleteMovies(myMovieObj)
+        .then(response => response.json());
+})
