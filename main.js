@@ -1,9 +1,9 @@
 const movieList = "https://perpetual-pear-bearberry.glitch.me/movies";
 
-getMovies();
+getMovies(); // initial fetch request and loads content
 
-let moviesArr = [];
-let myMovieObj = {};
+let moviesArr = []; // all movies displayed
+let myMovieObj = {}; // movie selected by edit/delete buttons
 
 function getMovies() {
     $(".container").html('<div class="loader m-auto"></div>')
@@ -12,7 +12,6 @@ function getMovies() {
             .then(response => response.json())
             .then(movies => {
                 $(".loader").hide();
-                $(".container").html('<div class="card-deck d-flex justify-content-between flex-wrap"></div>')
                 movies.forEach(movie => {
                     console.log(movie);
                     moviesArr.push(movie)
@@ -26,7 +25,7 @@ function getMovies() {
                     let rating = movie.rating
                     let id = movie.id
                     $(".card-deck").append(`
-                    <div class="card mb-5" style="width: 18rem">
+                    <div id="${id}" class="card mb-5" style="width: 18rem">
                         <img class="moviePoster card-img-top" src="${img}" alt="movie poster">
                         <div class="card-body">
                             <h5 class="movieTitle card-title">${title}</h5>
@@ -188,13 +187,25 @@ $("#deleteMovieButton").click(function (e) {
         .then(response => response.json());
 })
 
-// $('#searchMovie').click(e => {
-//     e.preventDefault();
-//     let searchString = e.target.value.toLowerCase()
-//     let filteredMovies = moviesArr.filter(movie => {
-//         return (
-//             movie.title.toLowerCase().includes(searchString)
-//         );
-//     });
-//
-// })
+$('#searchMovie').click(e => {
+    e.preventDefault();
+    let searchString = $("#searchBar").val().toLowerCase()
+    moviesArr.forEach(movie => {
+        let title = movie.title.toLowerCase();
+        let director = movie.director.toLowerCase();
+        let actors = movie.actors.toLowerCase();
+        let genre = movie.genre.toLowerCase();
+        let id = movie.id;
+        if (title.includes(searchString)) {
+            $(`#${id}`).show();
+        } else if (director.includes(searchString)) {
+            $(`#${id}`).show();
+        } else if (actors.includes(searchString)) {
+            $(`#${id}`).show();
+        } else if (genre.includes(searchString)) {
+            $(`#${id}`).show();
+        } else {
+            $(`#${id}`).hide();
+        }
+    })
+})
