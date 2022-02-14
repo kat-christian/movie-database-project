@@ -187,3 +187,14 @@ $("#deleteMovieButton").click(function (e) {
     deleteMovies(myMovieObj)
         .then(response => response.json());
 })
+
+// $('#searchMovie').click(e => {
+//     e.preventDefault();
+//     let searchString = e.target.value.toLowerCase()
+//     let filteredMovies = moviesArr.filter(movie => {
+//         return (
+//             movie.title.toLowerCase().includes(searchString)
+//         );
+//     });
+//
+// })
